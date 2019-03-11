@@ -10,17 +10,19 @@ spring:
 
 server:
   port: 8050
-
 eureka:
-  instance:
-      prefer-ip-address: true  #优选通过IP地址找到对应的服务名称
-      instance-id: ${spring.application.name}:${spring.application.instance_id}:${random.value}
   client:
-    #配置eureka注册中心地址
     serviceUrl:
-#      defaultZone: http://localhost:8761/eureka/
-#      上线测试需要使用以下配置
-      defaultZone: http://eureka-server:30001/eureka/
+      defaultZone: http://eureka-eureka:8761/eureka/
+  instance:
+    #心跳时间，服务续约间隔时间 （默认30秒）
+    lease-renewal-interval-in-seconds: 2
+    #发呆时间，服务续约到期时间（缺省90秒）
+    lease-expiration-duration-in-seconds: 2
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${server.port}
+    hostname: ${spring.cloud.client.ipAddress}
+
 
 #设置Hystrix熔断器判定超时时间
 #hystrix:
