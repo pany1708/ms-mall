@@ -16,6 +16,8 @@ public class Order {
     private String number;
     @ApiModelProperty(value="用户编号",name="userid",example="1")
     private Integer userid;
+    @ApiModelProperty(value="订单描述",name="description",example="Apple Watch 4")
+    private String descript;
     @ApiModelProperty(value="创建时间",name="time",hidden = true)
     private Date createtime;
 }
