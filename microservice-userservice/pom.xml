@@ -23,6 +23,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.11</version>
 		</dependency>
 		<!-- eureka客户端启动器 -->
 		<dependency>
@@ -40,75 +41,80 @@
 			<artifactId>springfox-swagger2</artifactId>
 			<version>2.2.2</version>
 		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<!-- Docker maven plugin -->
-			<plugin>
-				<groupId>com.spotify</groupId>
-				<artifactId>docker-maven-plugin</artifactId>
-				<version>1.0.0</version>
-				<configuration>
-					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
-					<dockerDirectory>.</dockerDirectory>
-					<resources>
-						<resource>
-							<targetPath>/</targetPath>
-							<directory>${project.build.directory}</directory>
-							<include>${project.build.finalName}.jar</include>
-						</resource>
-					</resources>
-				</configuration>
-			</plugin>
-			<!-- Docker maven plugin -->
-			<plugin>
-				<groupId>com.spotify</groupId>
-				<artifactId>docker-maven-plugin</artifactId>
-				<version>1.0.0</version>
+	<!--<build>-->
+		<!--<plugins>-->
+			<!--<plugin>-->
+				<!--<groupId>org.springframework.boot</groupId>-->
+				<!--<artifactId>spring-boot-maven-plugin</artifactId>-->
+			<!--</plugin>-->
+			<!--&lt;!&ndash; Docker maven plugin &ndash;&gt;-->
+			<!--<plugin>-->
+				<!--<groupId>com.spotify</groupId>-->
+				<!--<artifactId>docker-maven-plugin</artifactId>-->
+				<!--<version>1.0.0</version>-->
+				<!--<configuration>-->
+					<!--<imageName>${docker.image.prefix}/${project.artifactId}</imageName>-->
+					<!--<dockerDirectory>.</dockerDirectory>-->
+					<!--<resources>-->
+						<!--<resource>-->
+							<!--<targetPath>/</targetPath>-->
+							<!--<directory>${project.build.directory}</directory>-->
+							<!--<include>${project.build.finalName}.jar</include>-->
+						<!--</resource>-->
+					<!--</resources>-->
+				<!--</configuration>-->
+			<!--</plugin>-->
+			<!--&lt;!&ndash; Docker maven plugin &ndash;&gt;-->
+			<!--<plugin>-->
+				<!--<groupId>com.spotify</groupId>-->
+				<!--<artifactId>docker-maven-plugin</artifactId>-->
+				<!--<version>1.0.0</version>-->
 
-				<!--将插件绑定在某个phase执行-->
-				<executions>
-					<execution>
-						<id>build-image</id>
-						<!--将插件绑定在package这个phase上。也就是说，用户只需执行mvn package ，就会自动执行mvn docker:build-->
-						<phase>package</phase>
-						<goals>
-							<goal>build</goal>
-						</goals>
-					</execution>
-				</executions>
+				<!--&lt;!&ndash;将插件绑定在某个phase执行&ndash;&gt;-->
+				<!--<executions>-->
+					<!--<execution>-->
+						<!--<id>build-image</id>-->
+						<!--&lt;!&ndash;将插件绑定在package这个phase上。也就是说，用户只需执行mvn package ，就会自动执行mvn docker:build&ndash;&gt;-->
+						<!--<phase>package</phase>-->
+						<!--<goals>-->
+							<!--<goal>build</goal>-->
+						<!--</goals>-->
+					<!--</execution>-->
+				<!--</executions>-->
 
-				<configuration>
-					<!--指定生成的镜像名-->
-					<imageName>daocloud/${project.artifactId}</imageName>
-					<!--指定标签-->
-					<imageTags>
-						<imageTag>latest</imageTag>
-					</imageTags>
-					<!-- 指定 Dockerfile 路径-->
-					<dockerDirectory>.</dockerDirectory>
+				<!--<configuration>-->
+					<!--&lt;!&ndash;指定生成的镜像名&ndash;&gt;-->
+					<!--<imageName>daocloud/${project.artifactId}</imageName>-->
+					<!--&lt;!&ndash;指定标签&ndash;&gt;-->
+					<!--<imageTags>-->
+						<!--<imageTag>latest</imageTag>-->
+					<!--</imageTags>-->
+					<!--&lt;!&ndash; 指定 Dockerfile 路径&ndash;&gt;-->
+					<!--<dockerDirectory>.</dockerDirectory>-->
 
-					<!--指定远程 docker api地址-->
-					<dockerHost>http://192.168.0.107</dockerHost>
+					<!--&lt;!&ndash;指定远程 docker api地址&ndash;&gt;-->
+					<!--<dockerHost>http://192.168.0.107</dockerHost>-->
 
-					<!-- 这里是复制 jar 包到 docker 容器指定目录配置 -->
-					<resources>
-						<resource>
-							<targetPath>/</targetPath>
-							<!--jar 包所在的路径  此处配置的 即对应 target 目录-->
-							<directory>${project.build.directory}</directory>
-							<!-- 需要包含的 jar包 ，这里对应的是 Dockerfile中添加的文件名　-->
-							<include>${project.build.finalName}.jar</include>
-						</resource>
-					</resources>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+					<!--&lt;!&ndash; 这里是复制 jar 包到 docker 容器指定目录配置 &ndash;&gt;-->
+					<!--<resources>-->
+						<!--<resource>-->
+							<!--<targetPath>/</targetPath>-->
+							<!--&lt;!&ndash;jar 包所在的路径  此处配置的 即对应 target 目录&ndash;&gt;-->
+							<!--<directory>${project.build.directory}</directory>-->
+							<!--&lt;!&ndash; 需要包含的 jar包 ，这里对应的是 Dockerfile中添加的文件名　&ndash;&gt;-->
+							<!--<include>${project.build.finalName}.jar</include>-->
+						<!--</resource>-->
+					<!--</resources>-->
+				<!--</configuration>-->
+			<!--</plugin>-->
+		<!--</plugins>-->
+	<!--</build>-->
 	<!--<build>-->
 		<!--<plugins>-->
 			<!--&lt;!&ndash; dockerfile plugin &ndash;&gt;-->
