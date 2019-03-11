@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -48,5 +45,20 @@ public class UserController {
 					new ParameterizedTypeReference<List<Order>>(){});
 		List<Order> orders = rateResponse.getBody();
 		return orders;
+	}
+
+	@ApiOperation(value = "新建用户", notes = "")
+	@ApiResponses(value = {@ApiResponse(code = 200, message = "Success"),
+			@ApiResponse(code = 401, message = "Unauthorized"), @ApiResponse(code = 403, message = "Forbidden"),
+			@ApiResponse(code = 404, message = "Not Found"), @ApiResponse(code = 500, message = "Failure")})
+	@PostMapping(path="/saveUser/")
+	public User createUser(@RequestBody User user){
+		userMapper.saveUser(user);
+		LOG.info("userId:"+user.getId());
+		if(user.getId() != null && user.getId() > 0) {
+			User result = userMapper.selectUserById(user.getId());
+			return result;
+		}
+		return new User();
 	}
 }

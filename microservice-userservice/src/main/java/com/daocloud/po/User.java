@@ -8,14 +8,14 @@ import java.io.Serializable;
 
 @Data
 @ToString
-@ApiModel(value="订单对象",description="订单对象")
+@ApiModel(value="用户对象",description="用户对象")
 public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@ApiModelProperty(value="主键",name="id",example="1",hidden = true)
 	private Integer id;
-	@ApiModelProperty(value="主键",name="username",example="james")
+	@ApiModelProperty(value="用户名",name="username",example="james")
 	private String username;
-	@ApiModelProperty(value="主键",name="address",example="address")
+	@ApiModelProperty(value="地址",name="address",example="address")
 	private String address;
 
 }
