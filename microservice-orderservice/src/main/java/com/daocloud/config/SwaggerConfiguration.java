@@ -25,7 +25,7 @@ public class SwaggerConfiguration {
       watch.start();
       //用于生成对应API接口文档的描述信息，可省略
       ApiInfo apiInfo = new ApiInfo("订单管理API接口测试文档","description",
-        		"termsOfServiceUrl","contact","version","","");
+        		"orderservice","contact","version","","");
       Docket docket = new Docket(DocumentationType.SWAGGER_2)
         .apiInfo(apiInfo)
         .genericModelSubstitutes(ResponseEntity.class)
