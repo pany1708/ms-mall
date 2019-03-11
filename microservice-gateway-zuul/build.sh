@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
-mvn package
-docker build -t gateway:latest .
+mvn clean install
+rm -rf *.zip
+zip -r gateway-service.zip ./*
