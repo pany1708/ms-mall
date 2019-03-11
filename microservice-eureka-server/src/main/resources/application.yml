@@ -1,6 +1,6 @@
 spring:
     application:
-        name: eureka-server # 指定应用名称
+        name: eureka-service # 指定应用名称
 server:
   port: 8761
 eureka:
@@ -10,4 +10,4 @@ eureka:
     service-url:
 #      defaultZone: http://localhost:${server.port}/eureka/
 #      上线测试需要使用以下配置
-      defaultZone: http://eureka-server:${server.port}/eureka/
+      defaultZone: http://eureka-eureka:${server.port}/eureka/
